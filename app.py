@@ -26,14 +26,15 @@ def index():
 
         else :
             amount = total - price
-        
-        COIN_500 = 500 #COIN_500,100, 50, 10 : 상수
+        print(f"거스름돈: {amount}")
+
+        COIN_500 = 500
         COIN_100 = 100
         COIN_50 = 50
         COIN_10 = 10
         
-        coin500 = amount // COIN_500  # // : 나눗셈을 의미함 
-        coin500_nmg = amount % COIN_500 # coin500_nmg : 500으로 나눈 나머지, amount : 변수
+        coin500 = amount // COIN_500   
+        coin500_nmg = amount % COIN_500
 
         coin100 = coin500_nmg // COIN_100
         coin100_nmg = coin500_nmg % COIN_100
@@ -45,11 +46,11 @@ def index():
         coin10_nmg = coin50_nmg % COIN_10
 
 
-        return render_template("index.html", coin500 = coin500, coin100 = coin100, coin50 = coin50, coin10 = coin10) # index파일에 coin500, coin100, coin50, coin10 이 없으니까 보낸다는 의미이다. 
+        return render_template("index.html", coin500 = coin500, coin100 = coin100, coin50 = coin50, coin10 = coin10, amount = amount)  
     else:
         print("😙get 방식으로 진입")
 
-        return render_template("index.html") #get방식을 사용해야하니까 template에서 index파일을 가지고 옴
+        return render_template("index.html") 
     
 
 if __name__ == '__main__':  
