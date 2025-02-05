@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>거스름돈 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            margin: auto;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 95%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #dff0d8;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>거스름돈 계산기</h2>
+        <form action="/" method="POST">
+            <label for="amount"></label>총 지불금액(원)</label>
+            <label for="amount"></label>상품가격</label>
+            <input type="number" name="total" min="0" required>
+            <input type="number" name="price" min="0" required>
+          
+
+            <button type="submit">계산하기</button>
+        </form>
+    {% if amount is not none %}
+    <h2>거스름 돈 : {{amount}}
+        500원 : {{coin_500}}개
+        100원 : {{coin_100}}개
+        50원 : {{coin_50}}개
+        10원 : {{coin_10}}개
+    </h2>
+       {% endif %}
+    </div>
+</body>
+</html>
