@@ -84,9 +84,9 @@
 <body>
     <div class="container">
         <h2>💰 원화 환전 💰</h2>
-        <form action="/" method="POST">
-            <input type="number" name="total" placeholder="총 지불 금액 (원)" min="0" required>
-            <input type="number" name="price" placeholder="상품 가격 (원)" min="0" required>
+        <form action="/exchange_won" method="POST">
+            <label for="amount">원화 화폐단위로 분해할 금액 </label>
+            <input type="number" id="amount" name="amount" min="0" required>
             <button type="submit">계산하기</button>
         </form>
     

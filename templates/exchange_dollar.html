@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>거스름돈 계산기</title>
+    <title>원화 환전</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -83,10 +83,10 @@
 </head>
 <body>
     <div class="container">
-        <h2>💰 거스름돈 계산기 💰</h2>
-        <form action="/" method="POST">
-            <input type="number" name="total" placeholder="총 지불 금액 (원)" min="0" required>
-            <input type="number" name="price" placeholder="상품 가격 (원)" min="0" required>
+        <h2>💰 달러 환전 💰</h2>
+        <form action="/exchange_dollar" method="POST">
+            <label for="amount">달러 화폐단위로 분해할 금액 </label>
+            <input type="number" id="amount" name="amount" min="0" required>
             <button type="submit">계산하기</button>
         </form>
     
