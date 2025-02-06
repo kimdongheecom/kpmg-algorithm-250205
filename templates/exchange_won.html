@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>거스름돈 계산기</title>
+    <title>원화 환전</title>
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
@@ -83,15 +83,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>💰 거스름돈 계산기 💰</h2>
+        <h2>💰 원화 환전 💰</h2>
         <form action="/" method="POST">
             <input type="number" name="total" placeholder="총 지불 금액 (원)" min="0" required>
             <input type="number" name="price" placeholder="상품 가격 (원)" min="0" required>
             <button type="submit">계산하기</button>
         </form>
     
-              {{render_html | default('') | safe }} 
-              <!-- render_html은 app.py에서 만들어 졌다. app.py참고......  -->
+              {{render_html | default('') | safe }}  
               <!-- # default('') 뜻은 겟방식 할 때 "결과보기를 안나오게 하기 위해", safe는 태그<>를 안보이게 하기 위해 -->
 
     
