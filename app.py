@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-app = Flask(__name__)
+from count import Count  #count_1은 아직 이름이 정해져 있지 않다. 이름을 붙여줘야한다. 초기화과정을 해줘야한다...
+#class 는 함수이다. 함수를 모아 놓은게 클래스이다. 클래스 안에 있는게 메소드이다.인공지능할 때 클래스 만들고, 메소드를 호출할 것이다.
 
+app = Flask(__name__) # 실제이름은 Flask이지만, 인식이 안되기 때문에,,,,app이라는 이름을 준 것이다. 
 @app.route('/')
 def intro():
 
@@ -15,18 +17,6 @@ def exchange_won2():
 def exchange_dollar2():
 
     return render_template("/exchange_dollar.html")
-
-
-def get_unit_count(amount, unit_list): # get_unit_count(중첩함수)는 unit(예를 들어, 원화, 엔화, 달러 등을 의미함), count는 갯수,,,,즉, 단위와 갯수를 의미함.
-    unit_dict = {} # ....count는 갯수,,,,즉, 단위와 갯수를 의미함. 즉, 단위에 맞고, 갯수를 맞추기 위해 이러한 함수를 설정함.
-    money = amount 
-    
-    for unit in unit_list :
-        unit_dict[unit] = money // unit 
-        money %= unit 
-        print(f"{unit}원: {unit_dict[unit]}개") 
-    return unit_dict
-
 
 @app.route('/exchange_won', methods=['POST', 'GET'])
 def exchange_won():
@@ -59,7 +49,9 @@ def exchange_won():
 
         unit_list = [WON_50000,WON_10000,WON_5000,WON_1000, WON_500, WON_100, WON_50, WON_10]
 
-        unit_dict = get_unit_count(amount, unit_list) 
+        unit_count = Count()
+
+        unit_dict = unit_count.get_unit_count(amount, unit_list) 
 
         for unit, count in unit_dict.items(): 
             print(f"{unit}원: {count}개") 
@@ -111,7 +103,9 @@ def exchange_dollar():
 
         unit_list = [DOLLAR_100, DOLLAR_50, DOLLAR_10, DOLLAR_5, DOLLAR_1]
 
-        unit_dict = get_unit_count(amount, unit_list) 
+        unit_count = Count()
+
+        unit_dict = unit_count.get_unit_count(amount, unit_list) 
 
         for unit, count in unit_dict.items(): 
             print(f"{unit}$: {count}개") 
