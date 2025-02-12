@@ -10,105 +10,39 @@ def intro():
 
     return render_template("/index.html")
 
-@app.route('/exchange_won')
-def exchange_won2():
-
+@app.route('/won') #html과 같아야 한다.
+def exchange_won():
     return render_template("/exchange_won.html")
 
-@app.route('/exchange_dollar')
-def exchange_dollar2():
-
+@app.route('/dollar')
+def exchange_dollar():
     return render_template("/exchange_dollar.html")
 
-@app.route('/exchange_won', methods=['POST', 'GET'])
-def exchange_won():
+
+
+@app.route('/exchange', methods=['POST', 'GET'])
+def exchange():
     print("원화 환전에서 전송된 데이터 방식")
     
     if request.method == "POST":
         print("😎post 방식으로 진입")
-
         amount = request.form.get('amount')
-        # price = request.form.get('price')
-        amount = int(amount)
-        # total = int(total)
-        # price = int(price)
-        
-        # if price > total :
-        #     error_msg = "음수는 허용되지 않는다"
-
-        # else :
-        #     amount = total - price
-        # print(f"거스름돈: {amount}")
-
+        currency = request.form.get('currency') #USD, WON 함수
+        print("amount: ", amount)
        
-        controller = ExchangeController(amount = amount)
-
+       
+        controller = ExchangeController(amount = amount, currency = currency)
         resp : ExchangeModel = controller.getResult()
-
 
         render_html = '<h1>결과보기</h1>'
         render_html += resp.result
 
-        return render_template("exchange_won.html", render_html = render_html)
+        return render_template(resp.page, render_html = render_html)
     
     else:
         print("😙get 방식으로 진입")
 
         return render_template("exchange_won.html") 
-
-@app.route('/exchange_dollar', methods=['POST', 'GET'])
-def exchange_dollar():
-    print("달러 환전에서 전송된 데이터 방식")
-    
-    # dollar_500 = dollar_100 = dollar_50 = dollar_5 = 0
-    # total = None
-    # price = None
-    # amount = None
-    # error_msg = None
-
-
-
-    if request.method == "POST":
-        print("😎post 방식으로 진입")
-
-        amount = request.form.get('amount') #exchange_dollar에서 amount를 요청함. amount는 html에서 문자열이기 때문에, int()를 사용해서 변환시켜줌.
-        # price = request.form.get('price')
-       
-        amount = int(amount)  
-        # price = int(price)
-
-        # if price > total :
-        #     error_msg = "음수는 허용되지 않는다"
-
-        # else :
-        #     amount = total - price
-        # print(f"거스름돈: {amount}")
-
-        DOLLAR_100 = 100  
-        DOLLAR_50 = 50
-        DOLLAR_10 = 10
-        DOLLAR_5 = 5 
-        DOLLAR_1 = 1
-
-        unit_list = [DOLLAR_100, DOLLAR_50, DOLLAR_10, DOLLAR_5, DOLLAR_1]
-
-        unit_count = Count()
-
-        unit_dict = unit_count.get_unit_count(amount, unit_list) 
-
-        for unit, count in unit_dict.items(): 
-            print(f"{unit}$: {count}개") 
-
-        render_html = '<h1>결과보기</h1>' 
-        for unit, count in unit_dict.items(): 
-            render_html += f"{unit}$: {count}개 <br/>" 
-
-        return render_template("exchange_dollar.html", render_html = render_html)
-    
-    else:
-        print("😙get 방식으로 진입")
-
-        return render_template("exchange_dollar.html") 
 
 if __name__ == '__main__':  
    app.run(debug=True)
