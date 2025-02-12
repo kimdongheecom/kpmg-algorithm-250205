@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from count import Count  #count_1은 아직 이름이 정해져 있지 않다. 이름을 붙여줘야한다. 초기화과정을 해줘야한다...
+from com.kimdonghee.exchange.exchange_controller import ExchangeController
+from com.kimdonghee.exchange.exchange_model import ExchangeModel
+
 #class 는 함수이다. 함수를 모아 놓은게 클래스이다. 클래스 안에 있는게 메소드이다.인공지능할 때 클래스 만들고, 메소드를 호출할 것이다.
 
 app = Flask(__name__) # 실제이름은 Flask이지만, 인식이 안되기 때문에,,,,app이라는 이름을 준 것이다. 
@@ -38,27 +40,14 @@ def exchange_won():
         #     amount = total - price
         # print(f"거스름돈: {amount}")
 
-        WON_50000 = 50000  
-        WON_10000 = 10000
-        WON_5000 = 5000
-        WON_1000 = 1000 
-        WON_500 = 500
-        WON_100 = 100
-        WON_50 = 50
-        WON_10 = 10
+       
+        controller = ExchangeController(amount = amount)
 
-        unit_list = [WON_50000,WON_10000,WON_5000,WON_1000, WON_500, WON_100, WON_50, WON_10]
+        resp : ExchangeModel = controller.getResult()
 
-        unit_count = Count()
 
-        unit_dict = unit_count.get_unit_count(amount, unit_list) 
-
-        for unit, count in unit_dict.items(): 
-            print(f"{unit}원: {count}개") 
-
-        render_html = '<h1>결과보기</h1>' 
-        for unit, count in unit_dict.items(): 
-            render_html += f"{unit}원: {count}개 <br/>" 
+        render_html = '<h1>결과보기</h1>'
+        render_html += resp.result
 
         return render_template("exchange_won.html", render_html = render_html)
     
