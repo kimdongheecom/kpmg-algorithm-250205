@@ -18,7 +18,9 @@ def exchange_won():
 def exchange_dollar():
     return render_template("/exchange_dollar.html")
 
-
+@app.route('/yen')
+def exchange_yen():
+    return render_template("/exchange_yen.html")
 
 @app.route('/exchange', methods=['POST', 'GET'])
 def exchange():
@@ -26,22 +28,20 @@ def exchange():
     
     if request.method == "POST":
         print("😎post 방식으로 진입")
-        amount = request.form.get('amount')
-        currency = request.form.get('currency') #USD, WON 함수
+        amount = int(request.form.get('amount'))
+        currency = request.form.get('currency') #USD, WON, yen함수
         print("amount: ", amount)
-       
        
         controller = ExchangeController(amount = amount, currency = currency)
         resp : ExchangeModel = controller.getResult()
 
         render_html = '<h1>결과보기</h1>'
         render_html += resp.result
-
+        print("🍟page:", resp.page)
         return render_template(resp.page, render_html = render_html)
     
     else:
         print("😙get 방식으로 진입")
-
         return render_template("exchange_won.html") 
 
 if __name__ == '__main__':  
